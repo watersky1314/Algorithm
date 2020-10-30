@@ -19,12 +19,8 @@ public class SortTest {
 //        InsertSort.sort(nums);
 		int[] copyNums  = Arrays.copyOf(nums, 100000);
 		//取中点值
-        QuickSort.sort(nums, 0, nums.length-1, true);
-        System.out.println(QuickSort.k);
 //		System.out.println("copyNums:"+Arrays.toString(copyNums));
 		//取中间值
-		QuickSort.sort(copyNums, 0, nums.length-1, false);
-		System.out.println(QuickSort.k);
         long endTime = System.currentTimeMillis();
         System.out.println("排序后：" + Arrays.toString(nums));
         System.out.println("耗时：" + (endTime - starTime));
