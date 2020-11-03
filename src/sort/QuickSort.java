@@ -19,17 +19,17 @@ public class QuickSort {
 		int i = left;
 		int j = right;
 		System.out.println("left=" + left + ", right=" + right);
-		while (i != j) {
+		while (i < j) {
 			while (nums[i] < pivot) i++;
 			while (nums[j] > pivot) j--;
-			if (nums[i] == nums[j]) break;
+			if (nums[i] == nums[j]) j--;
 			if (i < j) {
 				swap(nums, i, j);
 			}
 			System.out.println(Arrays.toString(nums));
 		}
 		System.out.println("i=" + i + ", j=" + j);
-		System.out.println(Arrays.toString(nums));
+//		System.out.println(Arrays.toString(nums));
 		quickSort(nums, left, i - 1);
 		quickSort(nums, i + 1, right);
 	}
@@ -42,10 +42,10 @@ public class QuickSort {
 
 	public static void main(String[] args) {
 		int[] nums = {5, 6, 3, 7, 7, 1, 9, 10, 4, 8};
-//		nums = new int[10];
-//		for(int i=0;i<nums.length;i++){
-//			nums[i] = (int)(Math.random()*10)+1;
-//		}
+		nums = new int[10];
+		for (int i = 0; i < nums.length; i++) {
+			nums[i] = (int) (Math.random() * 10) + 1;
+		}
 		System.out.println(Arrays.toString(nums));
 		quickSort(nums, 0, nums.length - 1);
 	}
