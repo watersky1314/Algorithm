@@ -9,19 +9,23 @@ import java.util.Objects;
  */
 public class QuickSort {
 
-	public static void quickSort(int[] nums, int left, int right) {
-		if (Objects.isNull(nums)) {
+	public static void checkNums(int[] nums) {
+		if (Objects.isNull(nums) || nums.length == 0) {
 			throw new IllegalArgumentException("数组异常");
 		}
-		if (nums.length == 0 || left >= right) return;
+	}
+
+	public static void quickSort(int[] nums, int left, int right) {
+		// 递归出口
+		if (left >= right) return;
 		// 选中第一个元素作为基准值
 		int pivot = nums[left];
 		int i = left;
 		int j = right;
 		System.out.println("left=" + left + ", right=" + right);
 		while (i < j) {
-			while (nums[i] < pivot) i++;
-			while (nums[j] > pivot) j--;
+			while (nums[i] < pivot && i < j) i++;
+			while (nums[j] > pivot && i < j) j--;
 			if (nums[i] == nums[j]) j--;
 			if (i < j) {
 				swap(nums, i, j);
@@ -29,7 +33,7 @@ public class QuickSort {
 			System.out.println(Arrays.toString(nums));
 		}
 		System.out.println("i=" + i + ", j=" + j);
-//		System.out.println(Arrays.toString(nums));
+		System.out.println(Arrays.toString(nums));
 		quickSort(nums, left, i - 1);
 		quickSort(nums, i + 1, right);
 	}
@@ -41,11 +45,8 @@ public class QuickSort {
 	}
 
 	public static void main(String[] args) {
-		int[] nums = {5, 6, 3, 7, 7, 1, 9, 10, 4, 8};
-		nums = new int[10];
-		for (int i = 0; i < nums.length; i++) {
-			nums[i] = (int) (Math.random() * 10) + 1;
-		}
+		int[] nums = {1, 7, 1, 3, 10, 1, 9, 2, 5, 3};
+		checkNums(nums);
 		System.out.println(Arrays.toString(nums));
 		quickSort(nums, 0, nums.length - 1);
 	}
