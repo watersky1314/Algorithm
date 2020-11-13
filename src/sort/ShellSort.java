@@ -17,11 +17,11 @@ public class ShellSort {
 	public static void shellSort(int[] nums) {
 		int N = nums.length;
 		// 进行分组，最开始的增量(gap)为数组长度的一半
-		for (int gap = N / 2; gap > 0; gap /= 2) {
+		for (int gap = N / 2; gap > 0; gap /= 2) { // 无序元素
 			for (int i = gap; i < N; i++) {
 				int t = nums[i];
 				int j;
-				for (j = i - 1; j >= 0 && nums[j] >= t; j--) {
+				for (j = i - 1; j >= 0 && nums[j] >= t; j--) { // 有序元素
 					nums[j + 1] = nums[j];
 				}
 				nums[j + 1] = t;
