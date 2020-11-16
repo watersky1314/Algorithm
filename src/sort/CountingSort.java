@@ -18,19 +18,22 @@ public class CountingSort {
 	public static void countingSort(int[] nums) {
 		if (nums.length == 1) return;
 		int max = nums[0];
-		
+		int min = nums[0];
+
 		// 获取原数组最大元素值
 		for (int i = 1; i < nums.length; i++) {
 			max = max - nums[i] > 0 ? max : nums[i];
+			min = min - nums[i] < 0 ? min : nums[i];
 		}
-		// 创建大小为max+1的标记数组
-		int[] countNums = new int[max + 1];
+		// 创建大小为len的标记数组，len取值规则：max-min+1和nums.lenth,取其大的值
+		int len = max - min + 1 - nums.length >= 0 ? max - min + 1 : nums.length;
+		int[] countNums = new int[len];
 		for (int num : nums) {
 			countNums[num]++;
 		}
 		// 遍历标记数组，将其下标填充入原数组中
 		int index = 0;
-		for (int i = 0; i < max + 1; i++) {
+		for (int i = 0; i < len; i++) {
 			for (int j = 0; j < countNums[i]; j++) {
 				nums[index++] = i;
 			}
