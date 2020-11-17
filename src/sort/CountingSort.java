@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 计数排序：非比较的排序算法，通过统计数组元素出现的次数，然后依次遍历标记数组，将其下标填充到原数组中，即完成排序
+ * 计数排序：线性时间、非比较的排序算法，通过统计数组元素出现的次数，然后依次遍历标记数组，将其下标填充到原数组中，即完成排序
  * 计数排序是稳定的排序，其时间和空间复杂度均为O(n+k)
  */
 public class CountingSort {
@@ -20,7 +20,7 @@ public class CountingSort {
 		int max = nums[0];
 		int min = nums[0];
 
-		// 获取原数组最大元素值
+		// 获取原数组最大元素值和最小元素值
 		for (int i = 1; i < nums.length; i++) {
 			max = max - nums[i] > 0 ? max : nums[i];
 			min = min - nums[i] < 0 ? min : nums[i];
