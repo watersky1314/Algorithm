@@ -1,6 +1,7 @@
 package sort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,13 +13,24 @@ import java.util.Objects;
  */
 public class RadixSort {
 
+	/**
+	 * 检查数组
+	 *
+	 * @param nums 待排序数组
+	 */
 	public static void checkNums(int[] nums) {
 		if (Objects.isNull(nums) || nums.length == 0) {
 			throw new IllegalArgumentException("数组异常");
 		}
 	}
 
-	public static int getDigit(int[] nums) {
+	/**
+	 * 获取数组最大数的位数
+	 *
+	 * @param nums 待排数组
+	 * @return 数组最大值位数
+	 */
+	public static int getMaxLength(int[] nums) {
 		int max = nums[0];
 		for (int i = 1; i < nums.length; i++) {
 			max = max - nums[i] >= 0 ? max : nums[i];
@@ -27,17 +39,54 @@ public class RadixSort {
 		return maxChar.length;
 	}
 
-	public static void radixSort(int[] nums, int digit) {
-		List<int[]> markList = new ArrayList<>();
-		for (int i = 1; i <= digit; i++) {
-			int[] mark = new int[10];
-			for (int num : nums) {
-				mark[num % (10 * i)]++;
-			}
-			markList.add(mark);
-		}
-		for (int i = 0; i < markList.size(); i++) {
+	/**
+	 * 获取元素指定位数的值
+	 *
+	 * @param num 元素值
+	 * @param d   位数
+	 * @return 元素指定位置的值
+	 */
+	public static int getDigitValue(int num, int d) {
+		char[] numChar = String.valueOf(num).toCharArray();
+		if (numChar.length < d) return 0;
+		return numChar[d - 1];
+	}
 
+	public static void radixSort(int[] nums, int digit, int maxLength) {
+		// 递归出口
+		if (digit > maxLength) return;
+		// 标记数组
+		int len = 10;
+		int[] count = new int[len];
+		// 临时数组
+		int[] temp = new int[nums.length];
+		for (int num : nums) {
+			count[getDigitValue(num, digit)]++;
 		}
+		// 将标记数组的元素值变成待排元素的位置索引
+		for (int i = 1; i < len; i++) {
+			count[i] = count[i] + count[i - 1];
+		}
+		for (int num : nums) {
+			int d = getDigitValue(num, digit);
+			temp[count[d] - 1] = num;
+			count[d]--;
+		}
+
+		nums = Arrays.copyOf(temp, nums.length);
+		radixSort(nums, digit + 1, maxLength);
+	}
+
+	public static void main(String[] args) {
+		int[] nums = new int[10];
+		for (int i = 0; i < nums.length; i++) {
+			nums[i] = (int) (Math.random() * 10);
+		}
+		System.out.println("排序前：" + Arrays.toString(nums));
+		checkNums(nums);
+		int maxLength = getMaxLength(nums);
+		System.out.println("maxLength=" + maxLength);
+		radixSort(nums, 1, maxLength);
+		System.out.println("排序后：" + Arrays.toString(nums));
 	}
 }
