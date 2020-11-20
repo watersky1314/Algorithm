@@ -47,9 +47,7 @@ public class RadixSort {
 	 * @return 元素指定位置的值
 	 */
 	public static int getDigitValue(int num, int d) {
-		char[] numChar = String.valueOf(num).toCharArray();
-		if (numChar.length < d) return 0;
-		return numChar[d - 1];
+		return num/(new Double(Math.pow(10d, d)).intValue())%10;
 	}
 
 	public static void radixSort(int[] nums, int digit, int maxLength) {
@@ -72,7 +70,7 @@ public class RadixSort {
 			temp[count[d] - 1] = num;
 			count[d]--;
 		}
-
+		System.out.println(Arrays.toString(count));
 		nums = Arrays.copyOf(temp, nums.length);
 		radixSort(nums, digit + 1, maxLength);
 	}
