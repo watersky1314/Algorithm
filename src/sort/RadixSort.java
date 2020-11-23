@@ -40,14 +40,14 @@ public class RadixSort {
 	}
 
 	/**
-	 * 获取元素指定位数的值
+	 * 获取元素指定位数的数字
 	 *
 	 * @param num 元素值
 	 * @param d   位数
 	 * @return 元素指定位置的值
 	 */
 	public static int getDigitValue(int num, int d) {
-		return num/(new Double(Math.pow(10d, d)).intValue())%10;
+		return num%(new Double(Math.pow(10d, d)).intValue())/(new Double(Math.pow(10d, d-1)).intValue());
 	}
 
 	public static void radixSort(int[] nums, int digit, int maxLength) {
@@ -59,12 +59,15 @@ public class RadixSort {
 		// 临时数组
 		int[] temp = new int[nums.length];
 		for (int num : nums) {
+			System.out.println("第"+digit+"位上的数值："+getDigitValue(num,digit));
 			count[getDigitValue(num, digit)]++;
 		}
+
 		// 将标记数组的元素值变成待排元素的位置索引
 		for (int i = 1; i < len; i++) {
 			count[i] = count[i] + count[i - 1];
 		}
+		System.out.println(Arrays.toString(count));
 		for (int num : nums) {
 			int d = getDigitValue(num, digit);
 			temp[count[d] - 1] = num;
@@ -80,6 +83,7 @@ public class RadixSort {
 		for (int i = 0; i < nums.length; i++) {
 			nums[i] = (int) (Math.random() * 10);
 		}
+		nums = new int[]{0, 3, 9, 2, 6, 9, 6, 7, 8, 2};
 		System.out.println("排序前：" + Arrays.toString(nums));
 		checkNums(nums);
 		int maxLength = getMaxLength(nums);
