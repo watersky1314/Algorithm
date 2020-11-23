@@ -48,6 +48,12 @@ public class RadixSort {
 		return num % (new Double(Math.pow(10d, d)).intValue()) / (new Double(Math.pow(10d, d - 1)).intValue());
 	}
 
+	/**
+	 * 基数排序
+	 * @param nums 待排数组
+	 * @param digit 待排数组排序的位数
+	 * @param maxLength 待排数组元素的最大位数
+	 */
 	public static void radixSort(int[] nums, int digit, int maxLength) {
 		// 递归出口
 		if (digit > maxLength) return;
