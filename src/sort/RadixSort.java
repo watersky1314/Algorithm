@@ -1,8 +1,6 @@
 package sort;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -47,7 +45,7 @@ public class RadixSort {
 	 * @return 元素指定位置的值
 	 */
 	public static int getDigitValue(int num, int d) {
-		return num%(new Double(Math.pow(10d, d)).intValue())/(new Double(Math.pow(10d, d-1)).intValue());
+		return num % (new Double(Math.pow(10d, d)).intValue()) / (new Double(Math.pow(10d, d - 1)).intValue());
 	}
 
 	public static void radixSort(int[] nums, int digit, int maxLength) {
@@ -59,35 +57,30 @@ public class RadixSort {
 		// 临时数组
 		int[] temp = new int[nums.length];
 		for (int num : nums) {
-			System.out.println("第"+digit+"位上的数值："+getDigitValue(num,digit));
 			count[getDigitValue(num, digit)]++;
 		}
-
 		// 将标记数组的元素值变成待排元素的位置索引
 		for (int i = 1; i < len; i++) {
 			count[i] = count[i] + count[i - 1];
 		}
 		System.out.println(Arrays.toString(count));
-		for (int num : nums) {
-			int d = getDigitValue(num, digit);
-			temp[count[d] - 1] = num;
-			count[d]--;
+		for (int i = nums.length - 1; i >= 0; i--) {
+			int d = getDigitValue(nums[i], digit);
+			temp[count[d] - 1] = nums[i];
+			--count[d];
 		}
-		System.out.println(Arrays.toString(count));
-		nums = Arrays.copyOf(temp, nums.length);
+		System.arraycopy(temp, 0, nums, 0, temp.length);
 		radixSort(nums, digit + 1, maxLength);
 	}
 
 	public static void main(String[] args) {
 		int[] nums = new int[10];
 		for (int i = 0; i < nums.length; i++) {
-			nums[i] = (int) (Math.random() * 10);
+			nums[i] = (int) (Math.random() * 1000);
 		}
-		nums = new int[]{0, 3, 9, 2, 6, 9, 6, 7, 8, 2};
 		System.out.println("排序前：" + Arrays.toString(nums));
 		checkNums(nums);
 		int maxLength = getMaxLength(nums);
-		System.out.println("maxLength=" + maxLength);
 		radixSort(nums, 1, maxLength);
 		System.out.println("排序后：" + Arrays.toString(nums));
 	}
