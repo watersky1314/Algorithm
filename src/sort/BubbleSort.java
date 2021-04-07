@@ -13,7 +13,6 @@ public class BubbleSort {
 		if (Objects.isNull(nums) || nums.length == 0) {
 			return;
 		}
-		int k = 0;
 		for (int i = 0; i < nums.length - 1; i++) {
 			boolean flag = true;
 			for (int j = 0; j < nums.length - i - 1; j++) {
@@ -23,12 +22,10 @@ public class BubbleSort {
 					nums[j + 1] = t;
 					flag = false;
 				}
-				k++;
 			}
 
 			if (flag) break;
 		}
-		System.out.println("最终排序的次数:" + k);
 	}
 
 	public static void bubbleSort(int[] nums, int n) {
@@ -37,13 +34,13 @@ public class BubbleSort {
 		boolean flag = true;
 		for (int i = 0; i < n - 1; i++) {
 			if (nums[i] > nums[i + 1]) {
-				int t = nums[i+1];
-				nums[i+1] = nums[i];
+				int t = nums[i + 1];
+				nums[i + 1] = nums[i];
 				nums[i] = t;
 				flag = false;
 			}
 		}
-		if(flag) return;
-		bubbleSort(nums, n-1);
+		if (flag) return;
+		bubbleSort(nums, n - 1);
 	}
 }

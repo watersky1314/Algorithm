@@ -6,9 +6,9 @@ import java.util.Objects;
 /**
  * 归并排序：分治思想（分：以二分法无限将原序列拆分为两个子序列，直至子序列的元素为1；治：将子序列依次合并并使其有序）
  * 步骤：
- * 		1.递归二分法拆分两个子序列，直至子序列的元素为1；
- * 		2.申请临时空间序列，比较子序列元素，将排好序的元素放入临时空间中
- * 		3.将临时空间序列的元素放到原序列对应的位置
+ * 1.递归二分法拆分两个子序列，直至子序列的元素为1；
+ * 2.申请临时空间序列，比较子序列元素，将排好序的元素放入临时空间中
+ * 3.将临时空间序列的元素放到原序列对应的位置
  */
 public class MergeSort {
 
@@ -41,7 +41,7 @@ public class MergeSort {
 		while (i <= mid) {
 			temp[k++] = nums[i++];
 		}
-		while (j<= R) {
+		while (j <= R) {
 			temp[k++] = nums[j++];
 		}
 		System.out.println("临时数组temp:" + Arrays.toString(temp));

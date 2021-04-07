@@ -7,17 +7,13 @@ package sort;
  */
 public class InsertSort {
     public static void sort(int[] nums) {
-        int k = 0;//计算比较次数
         for (int i = 1; i < nums.length; i++) {//无序元素
             int t = nums[i];
             int j;
             for (j = i - 1; j >= 0 && nums[j] > t; j--) {//有序元素
                 nums[j+1] = nums[j];
-                k++;
             }
             nums[j+1] = t;
-			k++;
         }
-        System.out.println("排序总次数：" + k);
     }
 }
